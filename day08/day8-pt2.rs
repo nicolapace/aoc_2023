@@ -31,7 +31,7 @@ fn main() {
     }   
     let mut network : HashMap<&str, Vec<&str>> = HashMap::new();
     let mut currents : Vec<&str> = vec![];
-    for i in 2..=lines.len()-1{
+    for i in 2..lines.len(){
         let key = lines[i].split(" = (").nth(0).unwrap();
         let values = lines[i].split(" = (").nth(1).unwrap().split(")").nth(0).unwrap().split(", ").collect::<Vec<_>>();
         network.insert(key, values);
@@ -44,7 +44,7 @@ fn main() {
     let mut steps :Vec<u64> = vec![];
 
     /* cycle each then do MCM */
-    for i in 0..=currents.len()-1{
+    for i in 0..currents.len(){
         let mut step = 0;
         while currents[i].chars().nth(2).unwrap()!='Z' {
             currents[i] = network.get(currents[i]).unwrap()[indications[step % indications.len()]];
@@ -53,5 +53,5 @@ fn main() {
         steps.push(step as u64);
     }
     println!("steps: {:?}", steps);
-    println!("MCM: {}", lcm(steps) );
+    println!("Least common multiple: {}", lcm(steps) );
 }

@@ -1,5 +1,4 @@
 use std::fs;
-//use std::collections::HashSet;
 
 fn main() {
 
@@ -28,7 +27,7 @@ fn main() {
     }
     
     let mut min = 4294967295u64;
-    let mut passaggi = 0;
+    let mut steps = 0;
 
     /* SEARCH ALGORITHM */
     let mut j = 0;
@@ -40,31 +39,23 @@ fn main() {
             let mut jump = 4294967295u64;
             
             for conn in &connections {  
-                
-                //if connections[i][connections[i].len()-1][1]+connections[i][connections[i].len()-1][2] > comp {
+                let mut r = 0;
+                for row in conn {
+                    
+                    if row[1]<=comp && row[1]+row[2]>comp {
 
-                    let mut r = 0;
-                    for row in conn {
-                      
-                        if row[1]<=comp && row[1]+row[2]>comp {
-
-                            if row[1]+row[2]-comp < jump {
-                                jump = row[1]+row[2]-comp ;
-                            }
-                            comp = row[0]+(comp-row[1]);
-
-                            break;
+                        if row[1]+row[2]-comp < jump {
+                            jump = row[1]+row[2]-comp ;
                         }
-                        else if row[1]>comp{
-                            break;
-                        }
-                        
-                        r+=1;
-                        
-                        
+                        comp = row[0]+(comp-row[1]);
 
+                        break;
+                    } else if row[1]>comp {
+                        break;
                     }
-                //}
+                    
+                    r+=1;
+                }
 
                 print!(" -> {:?}", comp);
             }
@@ -77,11 +68,11 @@ fn main() {
 
 
             k+=jump;
-            passaggi+=1;
+            steps+=1;
         }
         println!();
         j+=2;
     }
     println!("result:  {:?} ", min);
-    println!("passaggi:  {:?} ", passaggi);
+    println!("steps:  {:?} ", steps);
 }

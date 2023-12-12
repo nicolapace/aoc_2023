@@ -20,7 +20,7 @@ fn main() {
             found_l = false;
             found_r = false;
 
-            for i in 0..=ssize-1{
+            for i in 0..ssize{
                if line.bytes().nth(i)!=None{
 
                     //left
@@ -38,7 +38,7 @@ fn main() {
                            diff=ssize-(i+1); 
                         }
                         let substring = &line[i..i+diff];
-                        for j in 0..=(numbers.len()-1){
+                        for j in 0..numbers.len() {
                             if substring.contains(numbers[j]) {
                                 found_l = true;
                                 sum+=((j+1)*10) as u32;
@@ -58,7 +58,7 @@ fn main() {
                            diff=i+1; 
                         }
                         let substring = &line[ssize-i-1..ssize-i-1+diff];
-                        for j in 0..=(numbers.len()-1){
+                        for j in 0..numbers.len() {
                             if substring.contains(numbers[j]) {
                                 found_r = true;
                                 sum+=(j+1) as u32;

@@ -10,7 +10,7 @@ fn main() {
         let sol2 = ((0.5* (time[i] + (time[i]*time[i] - 4.0 * distance[i] as f64).sqrt() ))-0.0000001).trunc() as u32;
         let sol1 =  (0.5* (time[i] - (time[i]*time[i] - 4.0 * distance[i] as f64).sqrt() )).trunc() as u32;
 
-        println!("soluzioni: {} - {} = {}", sol2, sol1, sol2-sol1 );
+        println!("solutions: {} - {} = {}", sol2, sol1, sol2-sol1 );
         res*= sol2-sol1;
     }
     println!("res: {}", res );

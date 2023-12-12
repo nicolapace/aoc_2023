@@ -1,5 +1,4 @@
 use std::fs;
-//use std::collections::HashSet;
 
 fn main() {
 
@@ -29,7 +28,6 @@ fn main() {
     //     println!("{:?}", _a);
     // }
 
-    
     let mut min = 4294967295u64;
 
     /* SEARCH ALGORITHM */

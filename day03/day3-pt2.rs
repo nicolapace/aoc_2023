@@ -56,7 +56,7 @@ fn main() {
     let mut gears : HashMap<u32, u32> = HashMap::new();
     let mut near_gear = 0;
         
-    for i in 0..=ssize-1 {
+    for i in 0..ssize {
         index = 0;
         to_add = false;
 
@@ -85,6 +85,8 @@ fn main() {
                 }
             }
         }
+
     }
+
     println!("result: {:?}", sum); 
 }

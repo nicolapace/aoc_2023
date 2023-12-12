@@ -2,7 +2,7 @@ use std::fs;
 use std::cmp;
 use std::cmp::Ordering;
 
-fn hand1_beats_hand2(hand1 : Vec<u32> , hand2 : Vec<u32>) -> Ordering {
+fn hand1_beats_hand2(hand1 : &Vec<u32> , hand2 : &Vec<u32>) -> Ordering {
     let mut cards1 = vec![0; 15];
     let mut cards2 = vec![0; 15];
 
@@ -24,34 +24,13 @@ fn hand1_beats_hand2(hand1 : Vec<u32> , hand2 : Vec<u32>) -> Ordering {
     }
     points1.sort_by(|a, b| b.cmp(a));
     points2.sort_by(|a, b| b.cmp(a));
-    for i in 0..=cmp::min(points1.len(),points2.len())-1 {
+    for i in 0..cmp::min(points1.len(),points2.len()) {
         if points1[i] > points2[i]{
             return Ordering::Greater;
         } else if points1[i] < points2[i]{
             return Ordering::Less;
         }
     }
-
-    // no points: see bigger card
-    // if points1.len()==5 && points2.len()==5 {
-    //     let mut bigger_card1 = 0;
-    //     let mut bigger_card2 = 0;
-    //     for i in 0..=4 {
-    //         if hand1[i]>bigger_card1 {
-    //             bigger_card1=hand1[i];
-    //         }
-    //         if hand2[i]>bigger_card2 {
-    //             bigger_card2=hand2[i];
-    //         }
-    //     }
-
-    //     if bigger_card1>bigger_card2 {
-    //         return Ordering::Greater;
-    //     }
-    //     else if bigger_card2>bigger_card1 {
-    //         return Ordering::Less;
-    //     }
-    // }
     
     //draw, see order of cards
     for i in 0..=4 {
@@ -89,7 +68,7 @@ fn main() {
         }
 
         let mut pow = 1;
-        for i  in 1..=el[1].len(){
+        for i in 1..=el[1].len(){
             bet+=pow*(el[1].bytes().nth(el[1].len()-i as usize).unwrap()-b'0') as u32;
             pow*=10;
         }
@@ -100,9 +79,7 @@ fn main() {
 
     let mut i = 0;
     while i < elements.len()-1{
-
-        
-        println!("cmp: {:?} vs {:?} : {:?}", elements[i], elements[i+1], hand1_beats_hand2(elements[i].clone(),elements[i+1].clone())); 
+        println!("cmp: {:?} vs {:?} : {:?}", elements[i], elements[i+1], hand1_beats_hand2(&elements[i],&elements[i+1])); 
         i+=2;
     }
     
@@ -111,7 +88,7 @@ fn main() {
     for i in 1..=elements.len(){
         sum += (i as u32)*elements[i-1][5];
     }
-   println!("elements: {:?}", elements); 
-   
+    
+    println!("elements: {:?}", elements); 
     println!("result: {}", sum); 
 }

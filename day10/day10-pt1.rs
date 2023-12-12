@@ -2,7 +2,7 @@ use std::fs;
 
 fn main() {
     /* PARSING */
-    let contents = fs::read_to_string("test2").expect("No file\n");
+    let contents = fs::read_to_string("input").expect("No file\n");
     let lines = contents.split("\n").collect::<Vec<_>>();
     let ssize = lines.len();
     

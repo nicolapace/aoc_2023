@@ -14,7 +14,7 @@ fn main() {
         }
     }   
     let mut network : HashMap<&str, Vec<&str>> = HashMap::new();
-    for i in 2..=lines.len()-1{
+    for i in 2..lines.len(){
         let key = lines[i].split(" = (").nth(0).unwrap();
         let values = lines[i].split(" = (").nth(1).unwrap().split(")").nth(0).unwrap().split(", ").collect::<Vec<_>>();
         network.insert(key, values);

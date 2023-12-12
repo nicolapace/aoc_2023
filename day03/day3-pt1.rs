@@ -43,18 +43,18 @@ fn main() {
         i=i+1;    
     }
     
-    for i in 0..=ssize-1 {
+    for i in 0..ssize {
         println!("{:?}", matrix[i]);
     }   
     println!("");
-    for i in 0..=ssize-1 {
+    for i in 0..ssize {
         println!("{:?}", matrix_num[i]);
     }
     let mut index;
     let mut to_add;  
     let mut num;
 
-    for i in 0..=ssize-1 {
+    for i in 0..ssize {
         index = 0;
         to_add = false;
         num = 0 as u32;
@@ -77,15 +77,10 @@ fn main() {
                 if !to_add && matrix[i][len as usize -1-j as usize]!=0  {
                     to_add = true;
                 }
-                
-            }
-
+            }   
             
-
- 
-        }
-
-       
+        }       
     }
+
     println!("result: {}", sum); 
 }

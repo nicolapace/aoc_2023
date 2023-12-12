@@ -35,34 +35,13 @@ fn hand1_beats_hand2(hand1 : Vec<u32> , hand2 : Vec<u32>) -> Ordering {
     }else{
         points2.push(cards2[1]);
     }
-    for i in 0..=cmp::min(points1.len(),points2.len())-1 {
+    for i in 0..cmp::min(points1.len(),points2.len()) {
         if points1[i] > points2[i]{
             return Ordering::Greater;
         } else if points1[i] < points2[i]{
             return Ordering::Less;
         }
     }
-
-    // // no points: see bigger card
-    // if points1.len()==5 {
-    //     let mut bigger_card1 = 0;
-    //     let mut bigger_card2 = 0;
-    //     for i in 0..=4 {
-    //         if hand1[i]>bigger_card1 {
-    //             bigger_card1=hand1[i];
-    //         }
-    //         if hand2[i]>bigger_card2 {
-    //             bigger_card2=hand2[i];
-    //         }
-    //     }
-
-    //     if bigger_card1>bigger_card2 {
-    //         return Ordering::Greater;
-    //     }
-    //     else if bigger_card2>bigger_card1 {
-    //         return Ordering::Less;
-    //     }
-    // }
     
     //draw, see order of cards
     for i in 0..=4 {
