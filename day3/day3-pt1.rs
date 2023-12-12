@@ -6,21 +6,11 @@ fn main() {
     let contents = fs::read_to_string("input").expect("No file\n");
     let lines = contents.split("\n");
     let ssize = lines.clone().collect::<Vec<_>>().len();
-    
+    let len = lines.clone().collect::<Vec<_>>()[1].bytes().count() as i32;
+    println!("size x: {:?}", len);
     println!("size y: {:?}", ssize);
 
-    let mut matrix : Vec<Vec<u8>> = Vec::with_capacity(ssize as usize);
-    let len = lines.clone().collect::<Vec<_>>()[1].bytes().count() as i32;
-    
-    println!("size x: {:?}", len);
-    for i in 0..=ssize-1 {
-        matrix.push(Vec::with_capacity(len as usize));
-        for _ in 0..=len-1 {
-            matrix[i].push(0);
-        }
-        println!("{:?}", matrix[i]);
-    }
-    println!("");
+    let mut matrix : Vec<Vec<u8>> = vec![vec![0; len as usize]; ssize as usize];
     let mut matrix_num = matrix.clone();
 
     let mut sum : u32 = 0;
