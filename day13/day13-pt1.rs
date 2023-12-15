@@ -1,10 +1,32 @@
 use std::fs;
-use std::collections::HashMap;
+// use std::collections::HashMap;
 
+fn is_even_palindrome( vec : &[u32] /*,  cache: &mut HashMap<Vec<u32>, bool> */) -> bool{
+    if vec.len() < 2 || vec.len() % 2 == 1 {
+        return false;
+    }
+    // if let Some(result) = cache.get(&vec.to_vec()) {
+    //     println!("using cache");
+    //     return result.clone();
+    // }
+    for i in 0..vec.len()/2 {
+        if vec[i] != vec[vec.len()-1-i] {
+            // cache.insert(vec.to_vec(), false);
+            return false;
+        }
+    }
+    // cache.insert(vec.to_vec(), true);
+    return true;
+
+
+}
 
 fn main() {
     /* PARSING */
-    let contents = fs::read_to_string("test").expect("No file\n");
+    let contents = fs::read_to_string("input").expect("No file\n");
+
+    // let mut cache_palindorme : HashMap<Vec<u32>, bool> = HashMap::new();
+    let mut sum =0;
 
     for block in contents.split("\n\n"){
         let mut horizontal_vec : Vec<u32> = vec![];
@@ -38,10 +60,40 @@ fn main() {
             vertical_vec[i]= vertical_vec[i]>>1;
         }
 
-        for el in vertical_vec {
-            println!("{:b}", el);
+        let mut found = false;   
+        let mut result :usize= 0;
+
+        let mut i = horizontal_vec.len()%2;
+        while i<horizontal_vec.len() -1{
+            if is_even_palindrome(&horizontal_vec[..i]/*, &mut cache_palindorme*/){
+                found = true;
+                result = i/2;
+                break;
+            }
+            if is_even_palindrome(&horizontal_vec[i..]/*, &mut cache_palindorme*/){
+                found = true;
+                result = i + (horizontal_vec.len()-i)/2 ;
+                break;
+            }
+            i+=  2-horizontal_vec.len()%2 ;
         }
-        println!();
+        result *= 100;
+        if !found {
+            let mut i = vertical_vec.len()%2;
+            while i<vertical_vec.len()-1 {
+                if is_even_palindrome( &vertical_vec[..i] /*, &mut cache_palindorme*/){
+                    result = i/2;
+                    break;
+                }
+                if is_even_palindrome( &vertical_vec[i..],/* &mut cache_palindorme*/){
+                    result = i + (vertical_vec.len()-i)/2 ;
+                    break;
+                }
+                i+=  2-vertical_vec.len()%2 ;
+            }
+        }
+        sum+=result;       
     }
+    println!("total: {}", sum);
     
 }
